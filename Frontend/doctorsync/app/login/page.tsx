@@ -1,7 +1,15 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function pages() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  
   return (
     <div className="flex items-center justify-center h-screen bg-primary">
       <div className="flex bg-login text-primary w-auto max-w-screen-md p-8">
@@ -12,37 +20,39 @@ export default function pages() {
           </div>
           <div className=" flex justify-start w-full ml-4 mt-4">
             <form>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 font-bold ml-2 text-xxs"
-                >
-                  EMAIL *:
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  className="border rounded-lg px-3 py-2 bg-secundary w-full"
-                  placeholder="Digite seu email"
-                />
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 font-bold ml-2 mt-4 text-xxs"
-                >
-                  SENHA *:
-                </label>
-                <input
-                  type="text"
-                  id="username"
-                  className="border rounded-lg px-3 py-2 bg-secundary w-full"
-                  placeholder="Digite sua senha"
-                />
+              <label
+                htmlFor="email"
+                className="block text-gray-700 font-bold ml-2 text-xxs"
+              >
+                EMAIL *:
+              </label>
+              <input
+                type="text"
+                id="username"
+                className="border rounded-lg px-3 py-2 bg-secundary w-full"
+                placeholder="Digite seu email"
+              />
+              <label
+                htmlFor="email"
+                className="block text-gray-700 font-bold ml-2 mt-4 text-xxs"
+              >
+                SENHA *:
+              </label>
+              <input
+                type="text"
+                id="username"
+                className="border rounded-lg px-3 py-2 bg-secundary w-full"
+                placeholder="Digite sua senha"
+              />
               <button
                 type="submit"
                 className="bg-green hover:bg-blue text-white font-bold  mt-4 py-2 px-4 rounded w-full mt-8"
               >
                 LOG IN
               </button>
-              <a href="/signin" className="mt-8">Criar nova conta</a>  
+              <a href="/signin" className="mt-8">
+                Criar nova conta
+              </a>
             </form>
           </div>
         </div>

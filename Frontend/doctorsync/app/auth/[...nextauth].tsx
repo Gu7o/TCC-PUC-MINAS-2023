@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import EmailProvider from 'next-auth/providers/email'
+import connectDB from 
 
 export const authOptions = {
   // Configure one or more authentication providers
