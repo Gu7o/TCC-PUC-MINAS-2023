@@ -9,6 +9,10 @@ export default function pages() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  console.log("Name:", name);
+  console.log("email:", email);
+  console.log("password:", password);
   
   return (
     <div className="flex items-center justify-center h-screen bg-primary">
@@ -27,6 +31,7 @@ export default function pages() {
                 EMAIL *:
               </label>
               <input
+              onChange={(e) => setEmail(e.target.value) }
                 type="text"
                 id="username"
                 className="border rounded-lg px-3 py-2 bg-secundary w-full"
@@ -39,6 +44,7 @@ export default function pages() {
                 SENHA *:
               </label>
               <input
+              onChange={(e) => setPassword(e.target.value)}
                 type="text"
                 id="username"
                 className="border rounded-lg px-3 py-2 bg-secundary w-full"
