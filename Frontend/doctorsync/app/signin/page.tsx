@@ -10,10 +10,6 @@ export default function pages() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // console.log("Name:", name);
-  // console.log("email:", email);
-  // console.log("password:", password);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,7 +23,7 @@ export default function pages() {
       const res = await fetch("api/register", {
         method: "POST",
         headers: {
-          "Content-Type": "app´lication/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name,
