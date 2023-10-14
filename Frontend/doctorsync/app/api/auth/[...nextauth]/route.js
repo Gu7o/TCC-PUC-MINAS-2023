@@ -1,4 +1,4 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import  CredentialsProvider  from 'next-auth/providers/credentials';
 
 const authOptions = {
@@ -16,11 +16,11 @@ const authOptions = {
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: "jwt"
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/"
+    signIn: "/signin"
   }
 };
 
