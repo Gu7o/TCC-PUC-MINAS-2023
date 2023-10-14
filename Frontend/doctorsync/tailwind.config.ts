@@ -16,7 +16,8 @@ const config: Config = {
       green: '#52796F',
       black: '#000000',
       cinzaclaro: '#B5BAC1',
-      login:'#2F3E46'
+      login:'#2F3E46',
+      red: '#FF0000'
     },
     fontSize : {
       xxs: ['10px', { lineHeight: '24px', letterSpacing: ' -0.03em' }],

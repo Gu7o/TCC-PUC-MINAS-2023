@@ -5,14 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function pages() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  console.log("Name:", name);
-  console.log("email:", email);
-  console.log("password:", password);
   
   return (
     <div className="flex items-center justify-center h-screen bg-primary">
@@ -59,6 +54,11 @@ export default function pages() {
               <a href="/signin" className="mt-8">
                 Criar nova conta
               </a>
+              {error && (
+              <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {error}
+              </div>
+              )}
             </form>
           </div>
         </div>

@@ -3,12 +3,15 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation"
 
 export default function pages() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +23,23 @@ export default function pages() {
     }
 
     try {
+
+      const resUserExists = await fetch("api/userExists", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const { user } = await resUserExists.json();
+
+      if (user) {
+        setError( "Já existe um usuário com esse email registrado");
+        console.log ( "Já existe um usuário com esse email registrado");
+        return
+      }
+
       const res = await fetch("api/register", {
         method: "POST",
         headers: {
@@ -31,10 +51,10 @@ export default function pages() {
           password,
         }),
       });
-      console.log("PASSEI PELO TRY");
-      if (res.ok) {
+       if (res.ok) {
         const form = e.target;
         form.reset();
+        router.push("/login");
       } else {
         console.log("Registro do usuário Falhou");
       }
@@ -100,6 +120,11 @@ export default function pages() {
               <a href="/login" className="mt-8">
                 Já possui conta? Faça Login
               </a>
+              {error && (
+              <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                {error}
+              </div>
+              )}
             </form>
           </div>
         </div>
