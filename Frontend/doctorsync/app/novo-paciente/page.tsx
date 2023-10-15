@@ -48,6 +48,11 @@ export default function page() {
       if (registerPaciant.ok) {
         const form = e.target;
         form.reset();
+        setName('');
+        setTelefone('');
+        setCPF('');
+        setNascimento('');
+        setEmail('');
       } else {
         console.log("Registro do usuário Falhou");
       }
