@@ -28,7 +28,7 @@ export default function pages() {
         return
       }
       console.log("LOGADO");
-      router.replace("pacientes");
+      router.replace("/");
 
     } catch (error) {
       console.log("ERROR", error)
