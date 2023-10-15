@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import  CredentialsProvider  from 'next-auth/providers/credentials';
-// import  connectMongoDB  from '@/lib/mongodb';
+import  connectMongoDB  from '@/lib/mongodb';
 import User  from "../../../../models/user";
 import bcrypt from 'bcryptjs'
 
@@ -13,28 +13,28 @@ const authOptions = {
 
       async authorize (credentials) {
         const { email, password} = credentials;
-        return true;
-        // try {
-        //   await connectMongoDB();
-        //   const usuario = await User.findOne ({ email });
-        //   console.log("Usuário apos requisição ", usuario)
 
-        //   if(!usuario){
-        //     return null;
-        //   }
+        try {
+          await connectMongoDB();
+          const usuario = await User.findOne ({ email });
+          console.log("Usuário apos requisição ", usuario)
 
-        //   passwordsMatch = await bcrypt.compare(password, usuario.password);
-        //   console.log("passwordsMatch", passwordsMatch);
-        //   if(!passwordsMatch) {
-        //     console.log("passwords nao batem")
-        //     return null;
-        //   }
-        //   return usuario;
+          if(!usuario){
+            return null;
+          }
+
+          const passwordsMatch = await bcrypt.compare(password, usuario.password);
+          console.log("passwordsMatch", passwordsMatch);
+          if(!passwordsMatch) {
+            console.log("passwords nao batem")
+            return null;
+          }
+          return usuario;
 
 
-        // } catch (error) {
-        //   console.log("Erro:", error);
-        // }
+        } catch (error) {
+          console.log("Erro:", error);
+        }
       },
 
     }),
