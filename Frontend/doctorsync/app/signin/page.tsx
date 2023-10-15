@@ -51,6 +51,7 @@ export default function pages() {
           password,
         }),
       });
+      console.log("Registro de resposta", res);
        if (res.ok) {
         const form = e.target;
         form.reset();
