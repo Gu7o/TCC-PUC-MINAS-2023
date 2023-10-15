@@ -1,51 +1,19 @@
+import {NextResponse} from "next/server";
+import  connectMongoDB  from "../../../lib/mongodb";
+import Paciente from "../../../models/paciente";
+import bcrypt from "bcryptjs";
 
-import  connectMongoDB  from '@/lib/mongodb';
-import { useSession } from 'next-auth/react'
+export async function POST (req) {
+    try {
+        const {name,telefone,CPF, nascimento, email, doctorEmail } = await req.json();
+        await connectMongoDB();
+        await Paciente.create ({name,telefone,CPF, nascimento, email, doctorEmail})
 
-// const authOptions = {
-
-//   providers: [
-//     CredentialsProvider ({
-//       name: "credentials",
-//       credentials: {},
-
-//       async authorize (credentials) {
-//         const { email, password} = credentials;
-
-//         try {
-//           await connectMongoDB();
-//           const usuario = await User.findOne ({ email });
-//           console.log("Usuário apos requisição ", usuario)
-
-//           if(!usuario){
-//             return null;
-//           }
-
-//           const passwordsMatch = await bcrypt.compare(password, usuario.password);
-//           console.log("passwordsMatch", passwordsMatch);
-//           if(!passwordsMatch) {
-//             console.log("passwords nao batem")
-//             return null;
-//           }
-//           return usuario;
-
-
-//         } catch (error) {
-//           console.log("Erro:", error);
-//         }
-//       },
-
-//     }),
-//   ],
-//   session: {
-//     strategy: "jwt"
-//   },
-//   secret: process.env.NEXTAUTH_SECRET,
-//   pages: {
-//     signIn: "/signin"
-//   }
-// };
-
-// const handler = NextAuth(authOptions);
-
-// export { handler as GET, handler as POST };
+      return NextResponse.json({
+            message: "Usuário registrado"
+        }, {status: 201}); 
+    } catch (error) {
+        return NextResponse.json({message: " Um erro ocorreu enquanto o usuário era registrado"},
+       { status: 500});
+    }
+}
